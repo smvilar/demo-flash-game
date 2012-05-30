@@ -1,0 +1,32 @@
+<actors>
+	<actor type="player">
+		<x>320</x>
+		<y>240</y>
+		<speed>0.2</speed>
+		<lives>3</lives>
+	</actor>
+	<actor type="enemyA">
+		<x>40</x>
+		<y>100</y>
+	</actor>
+	<actor type="enemyA">
+		<x>80</x>
+		<y>200</y>
+	</actor>
+	<actor type="enemyA">
+		<x>120</x>
+		<y>300</y>
+	</actor>
+	<actor type="enemyB">
+		<x>160</x>
+		<y>40</y>
+	</actor>
+	<actor type="enemyB">
+		<x>200</x>
+		<y>80</y>
+	</actor>
+	<actor type="enemyB">
+		<x>240</x>
+		<y>120</y>
+	</actor>
+</actors>
