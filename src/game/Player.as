@@ -11,6 +11,7 @@ package game
 		private var _pressingRight:Boolean = false;
 		private var _pressingUp:Boolean = false;
 		private var _pressingDown:Boolean = false;
+		private var _speed:Number;
 		
 		private var _lives:int = 10;
 		
@@ -81,6 +82,10 @@ package game
 			if (_pressingDown) {
 				_sprite.y += _speed * elapsed;
 			}
+		}
+		
+		override public function collide(actor:Actor):void {
+			_lives--;
 		}
 	}
 }

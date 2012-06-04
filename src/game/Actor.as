@@ -6,14 +6,19 @@ package game
 	public class Actor
 	{
 		protected var _sprite:Sprite;
-		protected var _speed:Number;
+		
+		public function get sprite():Sprite { return _sprite; }
 		
 		public function addTo(parent:DisplayObjectContainer):void {
 			parent.addChild(_sprite);
 		}
 		
 		public function update(elapsed:int):void {
-			// override me
+			throw new Error("Override me!");
+		}
+		
+		public function collide(actor:Actor):void {
+			
 		}
 		
 		protected function loadFromXML(xml:XML):void {
@@ -21,6 +26,13 @@ package game
 				_sprite.x = xml.x;
 			if (xml.y != undefined)
 				_sprite.y = xml.y;
+		}
+		
+		public function checkCollision(actor:Actor):void
+		{
+			if (sprite.hitTestObject(actor.sprite)) {
+				collide(actor);
+			}
 		}
 	}
 }

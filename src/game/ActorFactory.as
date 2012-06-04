@@ -1,18 +1,51 @@
 package game
 {
+	import flash.display.DisplayObjectContainer;
+
 	public class ActorFactory
 	{
-		public function parseXML(xml:XML):Actor {
-			var type:String = xml.@type;
+		private var _actors:Vector.<Actor> = new Vector.<Actor>;
+		private var _parent:DisplayObjectContainer;
+		
+		private var _player:Player;
+		
+		public function ActorFactory(parent:DisplayObjectContainer) {
+			_parent = parent;
+		}
+		
+		public function addActor(xml:XML):Actor {
+			const type:String = xml.@type;
+			var actor:Actor;
 			switch (type) {
 				case "player":
-					return new Player(xml);
+					actor = new Player(xml);
+					_player = actor as Player;
+					break;
 				case "enemyA":
-					return new EnemyA(xml);
+					actor = new EnemyA(xml);
+					break;
 				case "enemyB":
-					return new EnemyB(xml);
+					actor = new EnemyB(xml);
+					break;
+				case "enemyC":
+					actor = new EnemyC(xml);
+					(actor as EnemyC).player = _player;
+					break;
 			}
-			return null;
+			if (actor) {
+				actor.addTo(_parent);
+				_actors.push(actor);
+			}
+			return actor;
+		}
+		
+		public function update(elapsed:int):void {
+			for each (var actor:Actor in _actors) {
+				if (actor != _player) {
+					actor.checkCollision(_player);
+				}
+				actor.update(elapsed);
+			}
 		}
 	}
 }
